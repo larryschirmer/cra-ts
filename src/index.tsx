@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { createGlobalStyle } from 'styled-components';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import configureStore from './store';
+import { MainPage } from './components';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const GlobalStyle = createGlobalStyle`
+  body,
+  html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    color: #1a1a1a;
+    font-size: 10px;
+  }
+`;
+
+ReactDOM.render(
+  <Provider store={configureStore()}>
+    <GlobalStyle />
+    <MainPage />
+  </Provider>,
+  document.getElementById('root')
+);
+
